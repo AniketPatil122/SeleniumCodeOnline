@@ -1,0 +1,36 @@
+package ActionClassAutomation;
+
+import java.util.Iterator;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Action_2 {
+
+	public static void main(String[] args) throws InterruptedException {
+	//	System.setProperty("webdriver.chrome.driver", "C:\\Users\\Bynaric\\Documents/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://rahulshettyacademy.com/loginpagePractise/#");  //url
+		driver.findElement(By.xpath("//a[contains(text(),'Free Access to')]")).click();
+		Set<String> windows = driver.getWindowHandles();   //[ parentID and childID, subchildID]
+		Iterator<String>It = windows.iterator();
+		String parentID = It.next();
+		String childID = It.next();
+	//	String subchildId = It.next();
+		driver.switchTo().window(childID); //switch to childId 
+		System.out.println(driver.findElement(By.cssSelector(".im-para.red")).getText()); //find and print output result
+		driver.findElement(By.cssSelector(".im-para.red")).getText(); //find for actual text use debugging 
+	String emailId=	driver.findElement(By.cssSelector(".im-para.red")).getText().split("at")[1].trim().split(" ")[0]; // split the username 
+	driver.switchTo().window(parentID);   // then again switch to parentID for username type
+	driver.findElement(By.id("username")).sendKeys(emailId);  // thise email id  is veriable name 
+	Thread.sleep(2000);
+	driver.close();
+		
+		
+
+	}
+
+}
