@@ -1,0 +1,57 @@
+package RealTimeExercise;
+
+import java.util.Iterator;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Scoop1 {
+
+	public static void main(String[] args) throws InterruptedException {
+		//1. Give me the link count on page 
+		// link veriable name is 'a'
+		//2. count footer section link 
+		//3. In footer section count a link only 1st column
+		//4. click on each link in the column and check if the pages are opening
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		System.out.println(driver.findElements(By.tagName("a")).size());     //1.all webpage link count
+		
+		//2. count the footer section link.
+		WebElement footerdriver=driver.findElement(By.id("gf-BIG")); // specific area for search all link
+		System.out.println(footerdriver.findElements(By.tagName("a")).size()); //specific area all link count step
+		
+		//3. In footer section count a link only 1st column
+		WebElement columndriver=footerdriver.findElement(By.xpath("(//ul)[1]"));
+		System.out.println(columndriver.findElements(By.tagName("a")).size());
+		
+		//4. click on each link in the column and check if the pages are opening
+		for(int i=1; i<columndriver.findElements(By.tagName("a")).size(); i++)
+		{
+			String cliconlinkTab=Keys.chord(Keys.CONTROL,Keys.ENTER);     // help of enter link and open seperate	
+			columndriver.findElements(By.tagName("a")).get(i).sendKeys(cliconlinkTab);
+			Thread.sleep(5000);
+		}// opens all the tab
+		
+		// iterator and gives all the title
+			Set<String>abc=driver.getWindowHandles();
+			Iterator<String>it=abc.iterator();
+		
+			while(it.hasNext())
+			{
+				driver.switchTo().window(it.next());
+				System.out.println(driver.getTitle());
+			}
+		
+		
+		driver.close();
+
+	}
+
+}
