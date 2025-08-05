@@ -1,0 +1,104 @@
+package JavaClassDetails;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+//@Test
+public class Test1 {
+	public void regular()
+	{
+		ArrayList<String> names = new ArrayList<String>();
+		names.add("Aniket");
+		names.add("Don");
+		names.add("akya");
+		names.add("bakya");
+		names.add("packy");
+		int count=0;
+		
+		for (int i=0; i<names.size(); i++)
+		{
+		String actual=names.get(i);
+		if(actual.startsWith(""));
+		{
+			count++;
+		}
+		}
+		System.out.println(count);
+	}
+	//@Test
+	public void streamFilter()
+
+	{
+		ArrayList<String> names = new ArrayList<String>();
+		names.add("Aniket");
+		names.add("Don");
+		names.add("Akya");
+		names.add("Aakya");
+		names.add("packy");
+		//there is no life for intermidiate op if there is no terminal op
+		//terminal opertation will execute only if inter op (filter) return true
+		//we can create stream
+		//how to use filter in Stream API
+		
+		Long c=names.stream().filter(s->s.startsWith("s")).count();
+		System.out.println(c);
+		
+		long d= Stream.of("Aniket","Don","Akya","Aakya","packy").filter(s->
+		{
+			s.startsWith("A");
+			return true;
+		}).count();
+		System.out.println(d);
+		//print all name of arrya list
+		//names.stream().filter(s->s.length()>4).forEach(s->System.out.println(s));
+		names.stream().filter(s->s.length()>4).limit(1).forEach(s->System.out.println(s));
+	}
+	//@Test
+	public void streamMap()
+	{
+		ArrayList<String> names = new ArrayList<String>();
+		names.add("Aniket");
+		names.add("Don");
+		names.add("Akya");
+		//print names of which have last letter "a" with uppercase 
+		Stream.of("Aniket","Don","Akya","Aakya","packy").filter(s->s.endsWith("t")).map(s->s.toUpperCase())
+		.forEach(s->System.out.println(s));
+		//print names which have first letter as a with uppercase and sorted
+		List<String>names1=Arrays.asList("Aniket","Don","Akya","Aakya","Packy");
+		names1.stream().filter(s->s.startsWith("A")).sorted().map(s->s.toUpperCase()).forEach(s->System.out.println(s));
+		// merging 2 different lists
+		Stream<String> newStream=Stream.concat(names.stream(), names1.stream());
+		//newStream.sorted().forEach(s->System.out.println());
+		boolean flag=newStream.anyMatch(s->s.equalsIgnoreCase("Akya"));
+		System.out.println(flag);
+		Assert.assertTrue(flag);
+	}
+	@Test
+	public void streamCollect()
+	{
+		//new
+		//new list
+		//new list
+		List<String>ls=Stream.of("Aniket","Don","Akya","Aakya","Packy").filter(s->s.endsWith("y")).map(s->s.toUpperCase())
+		.collect(Collectors.toList());
+		System.out.println(ls.get(0));
+		
+		// important question for interview purpose
+		List<Integer>values=Arrays.asList(1,2,3,4,5,6,7,8,9);
+		// print unique number for this array list
+		//sort the array
+		//values.stream().distinct().forEach(s->System.out.println(s));
+		List<Integer>Li=values.stream().distinct().sorted().collect(Collectors.toList());
+		System.out.println(Li.get(2));
+		
+	}
+	}
+
+
+	
