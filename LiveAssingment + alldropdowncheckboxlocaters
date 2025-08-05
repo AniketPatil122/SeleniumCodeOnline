@@ -1,0 +1,38 @@
+package LiveAssingment;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class alldropdowncheckboxlocaters {
+
+	public static void main(String[] args) throws InterruptedException {
+	//	System.setProperty("webdriver.chrome.driver","C:\\Users\\Bynaric\\Documents/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get("https://rahulshettyacademy.com/angularpractice/");
+		Thread.sleep(1000);
+		driver.findElement(By.name("name")).sendKeys("aniket");
+		driver.findElement(By.name("email")).sendKeys("aniketpatil@gmail.com");
+		driver.findElement(By.id("exampleInputPassword1")).sendKeys("123456");
+		driver.findElement(By.id("exampleCheck1")).click();
+		WebElement static1 = driver.findElement(By.id("exampleFormControlSelect1"));
+		Select dropdown = new Select(static1);
+		dropdown.selectByIndex(0);
+		driver.findElement(By.id("inlineRadio1")).click();
+		driver.findElement(By.name("bday")).sendKeys("11/10/1999");
+		driver.findElement(By.cssSelector(".btn-success")).click();
+		System.out.println(driver.findElement(By.cssSelector(".alert-success")).getText());
+		Thread.sleep(2000);
+		driver.close();
+		
+				
+
+	}
+
+}
