@@ -1,0 +1,24 @@
+package DailyPractice;
+
+import java.util.Scanner;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class NdcsssLogInPage {
+
+	public static void main(String[] args) {
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://ndcsss.info/ay2526/");
+		driver.findElement(By.cssSelector("a[onclick='login.submit();']")).click();
+        driver.findElement(By.xpath("//input[@id='username']")).sendKeys("ndcsss_admin");
+		driver.findElement(By.id("password")).sendKeys("bsp009!@12");
+		//System.out.println("Please enter CAPTCHA manually and press Enter to continue...");
+		//new Scanner(System.in).nextLine();
+		//driver.findElement(By.className("form-control")).click();
+
+	}
+
+}
