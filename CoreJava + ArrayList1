@@ -1,0 +1,32 @@
+package CoreJava;
+
+import java.util.ArrayList;
+
+import org.testng.annotations.Test;
+@Test
+public class ArrayList1 {
+
+	public static void main(String[] args) {
+		ArrayList<String> a = new ArrayList<String>();
+		a.add("Aniket");
+		a.add("Patil");
+		a.add("Test Engineer");
+		a.add("Selenium");
+		//System.out.println(a.get(2));
+		
+		for (int i=0; i<a.size(); i++)
+		{
+			System.out.println(a.get(i));
+		}
+		System.out.println("********");
+		for (String arr:a)
+		{
+			System.out.println(arr);
+		}
+		// item is present or not
+		System.out.println(a.contains("Selenium"));
+		
+	
+	}
+
+}
